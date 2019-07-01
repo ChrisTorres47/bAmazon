@@ -12,3 +12,15 @@ connection.connect(function(err){
     if (err) throw err;
     console.log("connected as id" + connection.threadId)
 })
+
+inquirer.prompt([{
+    type: "list",
+    message: "What is the ID of the item you would like to buy?",
+    name: "ItemOfPurchase"
+}])
+
+inquirer.prompt([{
+    type: "number",
+    message: "How many units would you like to buy?",
+    name: "UnitsBought"
+}])
