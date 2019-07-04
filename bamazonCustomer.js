@@ -47,27 +47,12 @@ function start(){
         }])
         .then(function(answer){
             if(res[parseInt(answer.ItemOfPurchase) - 1].stock_quantity > answer.UnitsBought){
-              var newStock =  (parseInt(res[parseInt(answer.ItemOfPurchase) - 1].stock_quantity)) - (parseInt(answer.UnitsBought))
-                newStock
+                connection.query("UPDATE products SET stock_quantity = stock_quantity -" + answer.UnitsBought + "WHERE id=" + parseInt(answer.ItemOfPurchase));
+                console.log(connection.query("SELECT * FROM products WHERE price"))
                 displaytable();
-            }else{
-                console.log("Not enough quantity")
             }
-            // var correctid = parseInt(answer.ItemOfPurchase) - 1
-            // console.log(res[correctid].stock_quantity)
-        // if(answer.UnitsBought.stock_quantity > 0){
-                
-        // start();
-        // } else{
-        // console.log("There is not enough stock of this product for that purchase")
-        // }
-    })
-    })
-}
-
-
-// inquirer.prompt([{
-//     type: "number",
-//     message: "How many units would you like to buy?",
-//     name: "UnitsBought"
-// }])
+            else{
+                console.log("Not enough quantity")
+                displaytable();
+            }
+    })})};
