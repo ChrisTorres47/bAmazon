@@ -46,9 +46,13 @@ function start(){
             name: "UnitsBought"
         }])
         .then(function(answer){
-            if(res[parseInt(answer.ItemOfPurchase) - 1].stock_quantity > answer.UnitsBought){
-                connection.query("UPDATE products SET stock_quantity = stock_quantity -" + answer.UnitsBought + "WHERE id=" + parseInt(answer.ItemOfPurchase));
-                console.log(connection.query("SELECT * FROM products WHERE price"))
+            var itemsBought = answer.UnitsBought
+            var itemid = parseInt(answer.ItemOfPurchase)
+            connection.query("UPDATE products SET stock_quantity = stock_quantity -" + itemsBought + "WHERE id=" + itemid);
+            if(res[itemid - 1].stock_quantity > itemsBought){
+                console.log(answer.UnitsBought)
+                console.log(parseInt(answer.ItemOfPurchase))
+                // console.log(connection.query("SELECT * FROM products WHERE price"))
                 displaytable();
             }
             else{
