@@ -48,7 +48,7 @@ function start(){
         .then(function(answer){
             var itemsBought = answer.UnitsBought
             var itemid = parseInt(answer.ItemOfPurchase)
-            connection.query("UPDATE products SET stock_quantity = stock_quantity -" + itemsBought + "WHERE id=" + itemid);
+            connection.query("UPDATE products SET stock_quantity = stock_quantity -" + itemsBought + " WHERE id=" + itemid);
             if(res[itemid - 1].stock_quantity > itemsBought){
                 console.log(answer.UnitsBought)
                 console.log(parseInt(answer.ItemOfPurchase))
